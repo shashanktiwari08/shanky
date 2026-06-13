@@ -416,6 +416,8 @@ function setupUIHandlers() {
       }
       playBeepSound(400, 'sine', 0.1);
     });
+  }
+  
   // Initialize scrollwheel storytelling hooks
   setupScrollManager();
 }
