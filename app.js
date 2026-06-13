@@ -420,6 +420,23 @@ function setupUIHandlers() {
   
   // Initialize scrollwheel storytelling hooks
   setupScrollManager();
+
+  // Keyboard navigation accessibility shortcuts (1-6 keys)
+  window.addEventListener('keydown', (e) => {
+    // Disable shortcuts if user is typing in form inputs (e.g. QR input)
+    if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
+      return;
+    }
+    const key = e.key;
+    if (key >= '1' && key <= '6') {
+      const idx = parseInt(key) - 1;
+      const targetSector = sectors[idx];
+      if (targetSector) {
+        currentSectorIndex = idx;
+        warpToSector(targetSector);
+      }
+    }
+  });
 }
 
 // Custom Scroll Manager for warp scrolling between planets

@@ -17,6 +17,80 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- SEO & Screen Reader Crawlable Semantic Fallback Content -->
+  <main class="sr-only">
+    <h1>Shashank Tiwari — 3D Space Orrery Portfolio</h1>
+    <p>Full-stack developer & AI builder based in New Delhi, India. Specializing in bridging ML frameworks with production-ready full-stack software architectures.</p>
+    <p>Contact details: Email: info.shashanktiwari@gmail.com | Phone: +91-93543 84835</p>
+    
+    <section>
+      <h2>Professional Experience</h2>
+      <article>
+        <h3>Post-Training LLM Intern — Ethara.AI</h3>
+        <p>Period: Feb 2025 – Jun 2025</p>
+        <p>Optimized model training workflows, RLHF dataset structures, and evaluation benchmarks for LLM alignment.</p>
+      </article>
+      <article>
+        <h3>Data Science Intern — INTERNSVEDA</h3>
+        <p>Period: Jun 2024 – Jul 2024</p>
+        <p>EDA visualization systems, Matplotlib dashboard creation, and regression modeling.</p>
+      </article>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <article>
+        <h3>EduNest — Education SaaS Platform</h3>
+        <p>A full-stack React and Node.js SaaS application for course tracking and analytics dashboards.</p>
+        <a href="https://edunest-1-kg6h.onrender.com">EduNest Demo</a>
+      </article>
+      <article>
+        <h3>Review.AI — Review Analyser</h3>
+        <p>Python/Flask NLP sentiment analysis application extracting insights from customer reviews.</p>
+        <a href="https://review-ai-e34z.onrender.com">Review.AI Demo</a>
+      </article>
+      <article>
+        <h3>iGenQR — QR Code Generator</h3>
+        <p>A clean, frontend Netlify QR code generator.</p>
+        <a href="https://igenqr.netlify.app/">iGenQR Demo</a>
+      </article>
+      <article>
+        <h3>ASH Invoice Builder</h3>
+        <p>Business invoicing client application designed for Aerosky Hospitality.</p>
+        <a href="https://ashinvoice.netlify.app/">ASH Invoice Builder Demo</a>
+      </article>
+      <article>
+        <h3>ANPR System</h3>
+        <p>OpenCV and Tesseract OCR vehicle license plate recognition Flask application.</p>
+      </article>
+      <article>
+        <h3>Healthcare Queue Management SaaS</h3>
+        <p>Ongoing clinic workflow patient queue tracking token dashboard system.</p>
+      </article>
+      <article>
+        <h3>Avnika.co — Jewellery E-commerce</h3>
+        <p>Ongoing custom e-commerce React application with luxury brand aesthetic.</p>
+      </article>
+    </section>
+
+    <section>
+      <h2>Certifications</h2>
+      <ul>
+        <li>IBM Program: Big Data Engineer</li>
+        <li>Deloitte / Forage: Data Analytics Simulation</li>
+        <li>Samatrix: Foundation to AI, Data Science & Analytics</li>
+        <li>IBM Cognitive Class: Data Analysis with Python</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Technical Skills</h2>
+      <p>Languages: Python, Java, SQL, HTML/CSS/JS</p>
+      <p>Frameworks: React, Flask, Node.js, Express</p>
+      <p>AI/ML: LLM fine-tuning, OpenCV, Pandas, NumPy</p>
+      <p>Tools: Git, GitHub, VS Code, Vercel, Netlify, Render</p>
+    </section>
+  </main>
   <!-- Background Canvas for 3D Scene -->
   <canvas id="space-canvas"></canvas>
 
@@ -90,22 +164,22 @@
 
         <div class="orbital-nav">
           <h4 class="section-title">SECTOR NAVIGATION</h4>
-          <button class="nav-target active" data-target="sun">
+          <button class="nav-target active" data-target="sun" aria-label="Warp to Core System (The Sun)">
             <span class="nav-dot sun-dot"></span> Core System (The Sun)
           </button>
-          <button class="nav-target" data-target="planet-ai">
+          <button class="nav-target" data-target="planet-ai" aria-label="Warp to AI and Machine Learning Planet">
             <span class="nav-dot ai-dot"></span> AI & ML Planet
           </button>
-          <button class="nav-target" data-target="planet-web">
+          <button class="nav-target" data-target="planet-web" aria-label="Warp to Web and SaaS Planet">
             <span class="nav-dot web-dot"></span> Web / SaaS Planet
           </button>
-          <button class="nav-target" data-target="planet-client">
+          <button class="nav-target" data-target="planet-client" aria-label="Warp to Client Work Planet">
             <span class="nav-dot client-dot"></span> Client Work Planet
           </button>
-          <button class="nav-target" data-target="planet-data">
+          <button class="nav-target" data-target="planet-data" aria-label="Warp to Data Planet">
             <span class="nav-dot data-dot"></span> Data Planet
           </button>
-          <button class="nav-target" data-target="moon-tools">
+          <button class="nav-target" data-target="moon-tools" aria-label="Warp to Tools and Utilities Moon">
             <span class="nav-dot tools-dot"></span> Tools & Utilities Moon
           </button>
         </div>
