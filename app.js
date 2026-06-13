@@ -312,13 +312,13 @@ function setupLoader() {
       log.innerHTML += `<br>${step.text}`;
       
       currentStep++;
-      setTimeout(runStep, 600 + Math.random() * 400);
+      setTimeout(runStep, 35 + Math.random() * 25);
     } else {
       btn.style.display = 'inline-block';
     }
   }
   
-  setTimeout(runStep, 400);
+  setTimeout(runStep, 50);
   
   btn.addEventListener('click', () => {
     // Hide loader screen
@@ -415,6 +415,41 @@ function setupUIHandlers() {
         isAudioActive = true;
       }
       playBeepSound(400, 'sine', 0.1);
+    });
+  }
+
+  // Quick View Resume Modal buttons
+  const quickViewBtn = document.getElementById('quick-view-btn');
+  const resumeModal = document.getElementById('quick-resume-modal');
+  const closeModalBtn = document.getElementById('close-modal-btn');
+  
+  if (quickViewBtn && resumeModal && closeModalBtn) {
+    quickViewBtn.addEventListener('click', () => {
+      resumeModal.classList.remove('hide');
+      playBeepSound(550, 'triangle');
+    });
+    closeModalBtn.addEventListener('click', () => {
+      resumeModal.classList.add('hide');
+      playBeepSound(350, 'sine');
+    });
+  }
+
+  // Segment View Switcher (3D vs Flat CV)
+  const toggle3D = document.getElementById('toggle-3d');
+  const toggleFlat = document.getElementById('toggle-flat');
+  
+  if (toggle3D && toggleFlat) {
+    toggle3D.addEventListener('click', () => {
+      toggleFlat.classList.remove('active');
+      toggle3D.classList.add('active');
+      document.body.classList.remove('flat-view-active');
+      playBeepSound(450, 'triangle');
+    });
+    toggleFlat.addEventListener('click', () => {
+      toggle3D.classList.remove('active');
+      toggleFlat.classList.add('active');
+      document.body.classList.add('flat-view-active');
+      playBeepSound(450, 'triangle');
     });
   }
   

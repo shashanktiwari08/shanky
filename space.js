@@ -160,6 +160,37 @@ function initSpaceScene() {
   
   // Start Rendering
   animate();
+  
+  // Guided entry onboarding zoom pan
+  runGuidedOnboardingSequence();
+}
+
+// Cinematic Deep Space Camera descent onboarding
+function runGuidedOnboardingSequence() {
+  isTransitioning = true;
+  
+  // Lock controls temporarily
+  controls.enabled = false;
+  
+  // Set initial dramatic distant coordinates
+  camera.position.set(30, 140, 210);
+  controls.target.set(0, 0, 0);
+  camera.lookAt(0, 0, 0);
+  
+  // Smoothly descend camera into standard viewing orbit
+  gsap.timeline({
+    onComplete: () => {
+      isTransitioning = false;
+      controls.enabled = true;
+    }
+  })
+  .to(camera.position, {
+    x: 0,
+    y: 65,
+    z: 110,
+    duration: 3.2,
+    ease: 'power2.out'
+  }, 0);
 }
 
 // Generate cosmic particle starfield

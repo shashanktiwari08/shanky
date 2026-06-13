@@ -146,6 +146,12 @@
       </div>
     </header>
 
+    <!-- Mobile View Segment Switcher -->
+    <div class="mobile-segment-toggle hide-desktop">
+      <button id="toggle-3d" class="seg-btn active" aria-label="Switch to 3D Space View"><i class="ti ti-rotate-3d"></i> 3D Space</button>
+      <button id="toggle-flat" class="seg-btn" aria-label="Switch to Scrollable Flat Resume View"><i class="ti ti-notes"></i> Flat CV View</button>
+    </div>
+
     <!-- Left HUD Panel: Core Identity / Navigator -->
     <aside class="hud-panel panel-left" id="panel-profile">
       <div class="panel-header">
@@ -207,6 +213,11 @@
           <h4 class="section-title">COMMUNICATION</h4>
           <a href="mailto:info.shashanktiwari@gmail.com" class="contact-link"><i class="ti ti-mail"></i> info.shashanktiwari@gmail.com</a>
           <a href="tel:+919354384835" class="contact-link"><i class="ti ti-phone"></i> +91-93543 84835</a>
+          <a href="https://linkedin.com/in/shashanktiwari08" target="_blank" class="contact-link"><i class="ti ti-brand-linkedin"></i> linkedin.com/in/shashanktiwari08</a>
+          <a href="https://github.com/shashanktiwari08" target="_blank" class="contact-link"><i class="ti ti-brand-github"></i> github.com/shashanktiwari08</a>
+          <a href="Shashank_Tiwari_Resume.pdf" download="Shashank_Tiwari_Resume.pdf" class="contact-link" style="color: var(--accent-data); font-weight: 500;"><i class="ti ti-download"></i> DOWNLOAD PDF CV</a>
+          
+          <button class="copy-data-btn" id="quick-view-btn" style="border-color: var(--accent-web); color: var(--accent-web); margin-top: 5px;"><i class="ti ti-file-text"></i> QUICK VIEW RESUME</button>
           <button class="copy-data-btn" id="copy-text-btn"><i class="ti ti-copy"></i> COPY PROFILE TEXT</button>
         </div>
       </div>
@@ -214,8 +225,8 @@
 
     <!-- Right HUD Panel: Focused Planet Details & Projects -->
     <aside class="hud-panel panel-right hide" id="panel-details">
-      <button class="close-panel-btn" id="reset-cam-btn">
-        <i class="ti ti-arrow-left"></i> WARP OUT TO SYSTEM
+      <button class="close-panel-btn" id="reset-cam-btn" aria-label="Warp back to general system orrery view">
+        <i class="ti ti-arrow-left"></i> CLOSE DETAILED SYSTEM VIEW
       </button>
       
       <div class="panel-header">
@@ -238,6 +249,114 @@
         <input type="range" id="orbit-speed" min="0" max="3" step="0.1" value="1">
       </div>
     </footer>
+    <!-- Quick View Resume & Projects Modal Panel -->
+    <div id="quick-resume-modal" class="modal-overlay hide">
+      <div class="modal-card">
+        <header class="modal-header">
+          <h3><i class="ti ti-file-text"></i> SYSTEM_RESUME_LEDGER.DAT</h3>
+          <button id="close-modal-btn" aria-label="Close Resume Modal"><i class="ti ti-x"></i></button>
+        </header>
+        <div class="modal-body scrollable">
+          
+          <div class="modal-section-hero">
+            <h2>Shashank Tiwari</h2>
+            <p class="tagline">Full-stack Developer & AI Builder</p>
+            <p class="subtag">BCA (AI & Data Science) · Delhi, India</p>
+            <div class="modal-links">
+              <span><i class="ti ti-mail"></i> info.shashanktiwari@gmail.com</span>
+              <span><i class="ti ti-phone"></i> +91-93543 84835</span>
+              <a href="https://linkedin.com/in/shashanktiwari08" target="_blank"><i class="ti ti-brand-linkedin"></i> LinkedIn</a>
+              <a href="https://github.com/shashanktiwari08" target="_blank"><i class="ti ti-brand-github"></i> GitHub</a>
+            </div>
+          </div>
+
+          <div class="modal-grid">
+            <div class="modal-col">
+              <h4 class="section-title">WORK EXPERIENCE</h4>
+              
+              <div class="modal-resume-item">
+                <div class="resume-item-head">
+                  <h5>Post-Training LLM Intern</h5>
+                  <span class="badge b-intern">Ethara.AI</span>
+                </div>
+                <div class="resume-item-sub">Feb 2025 – Jun 2025 &nbsp;·&nbsp; Remote</div>
+                <p class="resume-item-desc">Managed post-training optimization pipelines for LLMs. Prepared RLHF alignment datasets, fine-tuned weights, and verified model performance benchmarks.</p>
+              </div>
+
+              <div class="modal-resume-item">
+                <div class="resume-item-head">
+                  <h5>Data Science Intern</h5>
+                  <span class="badge b-intern">INTERNSVEDA</span>
+                </div>
+                <div class="resume-item-sub">Jun 2024 – Jul 2024 &nbsp;·&nbsp; Gurugram</div>
+                <p class="resume-item-desc">Engineered regression models and performed Exploratory Data Analysis (EDA) on corporate datasets. Constructed visual dashboards using Matplotlib.</p>
+              </div>
+
+              <h4 class="section-title" style="margin-top: 25px;">CERTIFICATIONS</h4>
+              <div class="cert-list">
+                <div class="cert-row"><strong>Big Data Engineer</strong> — IBM Career Education (2025)</div>
+                <div class="cert-row"><strong>Data Analytics Job Simulation</strong> — Deloitte / Forage (2025)</div>
+                <div class="cert-row"><strong>Foundation to AI, Data Science & Analytics</strong> — Samatrix (2024)</div>
+                <div class="cert-row"><strong>Data Analysis with Python</strong> — IBM Cognitive Class (2023)</div>
+              </div>
+            </div>
+
+            <div class="modal-col">
+              <h4 class="section-title">PROJECTS REGISTRY</h4>
+              
+              <div class="modal-project-row">
+                <div class="project-row-head">
+                  <strong>EduNest — Education SaaS</strong>
+                  <a href="https://edunest-1-kg6h.onrender.com" target="_blank"><i class="ti ti-external-link"></i> Live</a>
+                </div>
+                <p>Full-stack education application with student metrics, course delivery, and Render deployment. <span class="tech-stack-inline">React · Node.js · Express · MongoDB</span></p>
+              </div>
+
+              <div class="modal-project-row">
+                <div class="project-row-head">
+                  <strong>Review.AI — Sentiment Analyzer</strong>
+                  <a href="https://review-ai-e34z.onrender.com" target="_blank"><i class="ti ti-external-link"></i> Live</a>
+                </div>
+                <p>AI sentiment extractor mapping key semantic themes from client reviews. <span class="tech-stack-inline">Python · NLP · Flask</span></p>
+              </div>
+
+              <div class="modal-project-row">
+                <div class="project-row-head">
+                  <strong>iGenQR — QR Generator</strong>
+                  <a href="https://igenqr.netlify.app/" target="_blank"><i class="ti ti-external-link"></i> Live</a>
+                </div>
+                <p>Utility dashboard for fast customized QR code packaging. <span class="tech-stack-inline">HTML/CSS · Vanilla JS · Netlify</span></p>
+              </div>
+
+              <div class="modal-project-row">
+                <div class="project-row-head">
+                  <strong>ASH Invoice Builder</strong>
+                  <a href="https://ashinvoice.netlify.app/" target="_blank"><i class="ti ti-external-link"></i> Live</a>
+                </div>
+                <p>Custom commercial printing invoice builder for Aerosky Hospitality. <span class="tech-stack-inline">JS · HTML/CSS</span></p>
+              </div>
+
+              <div class="modal-project-row">
+                <div class="project-row-head">
+                  <strong>ANPR System</strong>
+                  <span>Completed</span>
+                </div>
+                <p>Automated number plate reader using computer vision algorithms. <span class="tech-stack-inline">OpenCV · Tesseract OCR · Python</span></p>
+              </div>
+
+              <div class="modal-project-row">
+                <div class="project-row-head">
+                  <strong>Healthcare Queue SaaS</strong>
+                  <span class="tech-stack-inline">Ongoing</span>
+                </div>
+                <p>Clinics queue management dashboard with real-time screen displays. <span class="tech-stack-inline">React · Node.js · WebSockets</span></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Core Libraries -->
