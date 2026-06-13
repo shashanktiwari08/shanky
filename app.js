@@ -423,11 +423,46 @@ function setupUIHandlers() {
   const resumeModal = document.getElementById('quick-resume-modal');
   const closeModalBtn = document.getElementById('close-modal-btn');
   
+  function openResumeModalAndScrollTo(sectionSelector) {
+    if (!resumeModal) return;
+    resumeModal.classList.remove('hide');
+    document.body.classList.add('modal-active');
+    playBeepSound(550, 'triangle');
+    
+    // Smoothly scroll to the target segment inside the modal body after it becomes visible
+    setTimeout(() => {
+      const modalBody = resumeModal.querySelector('.modal-body');
+      let targetEl = null;
+      
+      if (sectionSelector === 'projects') {
+        // Find PROJECTS REGISTRY header
+        const titles = Array.from(modalBody.querySelectorAll('.section-title'));
+        targetEl = titles.find(el => el.textContent.includes('PROJECTS'));
+      } else if (sectionSelector === 'internships') {
+        // Find WORK EXPERIENCE header
+        const titles = Array.from(modalBody.querySelectorAll('.section-title'));
+        targetEl = titles.find(el => el.textContent.includes('WORK'));
+      } else if (sectionSelector === 'certs') {
+        // Find CERTIFICATIONS header
+        const titles = Array.from(modalBody.querySelectorAll('.section-title'));
+        targetEl = titles.find(el => el.textContent.includes('CERT'));
+      } else if (sectionSelector === 'live') {
+        // Scroll to the first live link project row
+        targetEl = modalBody.querySelector('.badge-live') || modalBody.querySelector('.project-row-head a');
+      }
+      
+      if (targetEl && modalBody) {
+        modalBody.scrollTo({
+          top: targetEl.offsetTop - 20,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
+  }
+
   if (quickViewBtn && resumeModal && closeModalBtn) {
     quickViewBtn.addEventListener('click', () => {
-      resumeModal.classList.remove('hide');
-      document.body.classList.add('modal-active');
-      playBeepSound(550, 'triangle');
+      openResumeModalAndScrollTo('internships');
     });
     closeModalBtn.addEventListener('click', () => {
       resumeModal.classList.add('hide');
@@ -435,6 +470,17 @@ function setupUIHandlers() {
       playBeepSound(350, 'sine');
     });
   }
+
+  // Bind individual stat cards to pop out the ledger
+  const statProjects = document.getElementById('stat-projects');
+  const statInternships = document.getElementById('stat-internships');
+  const statCerts = document.getElementById('stat-certs');
+  const statLive = document.getElementById('stat-live');
+
+  if (statProjects) statProjects.addEventListener('click', () => openResumeModalAndScrollTo('projects'));
+  if (statInternships) statInternships.addEventListener('click', () => openResumeModalAndScrollTo('internships'));
+  if (statCerts) statCerts.addEventListener('click', () => openResumeModalAndScrollTo('certs'));
+  if (statLive) statLive.addEventListener('click', () => openResumeModalAndScrollTo('live'));
 
   // Segment View Switcher (3D vs Flat CV)
   const toggle3D = document.getElementById('toggle-3d');
