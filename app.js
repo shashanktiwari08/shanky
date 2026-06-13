@@ -331,6 +331,15 @@ function setupLoader() {
     initSynthesizer();
     initSpaceScene();
     
+    // Activate sound UI by default
+    const audioBtn = document.getElementById('audio-toggle-btn');
+    if (audioBtn) {
+      audioBtn.classList.add('active');
+      const audioIcon = audioBtn.querySelector('i');
+      if (audioIcon) audioIcon.className = 'ti ti-volume';
+    }
+    isAudioActive = true;
+    
     // Default show Sun content
     window.onFocusChange('sun');
   });
