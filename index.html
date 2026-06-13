@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shashank Tiwari — 3D Orrery Space Portfolio</title>
+  <!-- SEO & Meta Tags -->
+  <meta name="description" content="Explore the immersive 3D space portfolio of Shashank Tiwari, Full-stack developer & AI builder. Navigate through planets representing AI/ML, Web/SaaS, and client work.">
+  <meta name="keywords" content="Shashank Tiwari, 3D Portfolio, Three.js, WebGL, AI developer, Full-stack developer, India, Delhi">
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Background Canvas for 3D Scene -->
+  <canvas id="space-canvas"></canvas>
+
+  <!-- Cyberpunk Boot/Loader screen -->
+  <div id="loader-screen">
+    <div class="loader-content">
+      <div class="glitch-title" data-text="SYSTEM INITIALIZATION">SYSTEM INITIALIZATION</div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar"></div>
+      </div>
+      <div class="loader-log" id="loader-log">
+        Initializing quantum orbital arrays...<br>
+        Loading Three.js render engine...<br>
+        Generating celestial project bodies...
+      </div>
+      <button id="enter-btn" class="glow-btn" style="display: none;">ENTER ORBITAL MATRIX</button>
+    </div>
+  </div>
+
+  <!-- Ambient audio elements (Synthesized via Web Audio API, but custom player UI is here) -->
+  <div class="audio-control" id="audio-toggle-btn" title="Toggle Celestial Soundscape">
+    <i class="ti ti-volume"></i>
+    <span>SOUNDSCAPE</span>
+  </div>
+
+  <!-- HUD Layout Overlay -->
+  <div id="hud-container">
+    
+    <!-- Top Bar HUD: System Status & Time -->
+    <header class="hud-top-bar">
+      <div class="hud-logo">
+        <span class="pulse-dot"></span>
+        <h1>ST_ORBITAL_V2.0</h1>
+      </div>
+      <div class="hud-telemetry">
+        <div class="telemetry-item">
+          <span class="label">COORDS:</span>
+          <span class="value" id="camera-coords">X: 0.00 Y: 0.00 Z: 0.00</span>
+        </div>
+        <div class="telemetry-item hide-mobile">
+          <span class="label">FPS:</span>
+          <span class="value" id="fps-counter">60</span>
+        </div>
+        <div class="telemetry-item">
+          <span class="label">SYSTEM STATUS:</span>
+          <span class="value status-green">STABLE</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Left HUD Panel: Core Identity / Navigator -->
+    <aside class="hud-panel panel-left" id="panel-profile">
+      <div class="panel-header">
+        <i class="ti ti-user-circle"></i>
+        <h2>CORE_IDENTITY.DAT</h2>
+      </div>
+      <div class="panel-body scrollable">
+        <div class="profile-card">
+          <div class="avatar-glow">ST</div>
+          <h3>Shashank Tiwari</h3>
+          <p class="tagline">Full-stack developer & AI builder · New Delhi, India</p>
+          <div class="bio-quotes">
+            <div class="quote-item active">"From ML models to live products — I ship end to end."</div>
+          </div>
+        </div>
+
+        <div class="orbital-nav">
+          <h4 class="section-title">SECTOR NAVIGATION</h4>
+          <button class="nav-target active" data-target="sun">
+            <span class="nav-dot sun-dot"></span> Core System (The Sun)
+          </button>
+          <button class="nav-target" data-target="planet-ai">
+            <span class="nav-dot ai-dot"></span> AI & ML Planet
+          </button>
+          <button class="nav-target" data-target="planet-web">
+            <span class="nav-dot web-dot"></span> Web / SaaS Planet
+          </button>
+          <button class="nav-target" data-target="planet-client">
+            <span class="nav-dot client-dot"></span> Client Work Planet
+          </button>
+          <button class="nav-target" data-target="planet-data">
+            <span class="nav-dot data-dot"></span> Data Planet
+          </button>
+          <button class="nav-target" data-target="moon-tools">
+            <span class="nav-dot tools-dot"></span> Tools & Utilities Moon
+          </button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-num">7</span>
+            <span class="stat-lbl">PROJECTS</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">2</span>
+            <span class="stat-lbl">INTERNSHIPS</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">4</span>
+            <span class="stat-lbl">CERTS</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">5</span>
+            <span class="stat-lbl">LIVE SITES</span>
+          </div>
+        </div>
+
+        <div class="quick-contact">
+          <h4 class="section-title">COMMUNICATION</h4>
+          <a href="mailto:info.shashanktiwari@gmail.com" class="contact-link"><i class="ti ti-mail"></i> info.shashanktiwari@gmail.com</a>
+          <a href="tel:+919354384835" class="contact-link"><i class="ti ti-phone"></i> +91-93543 84835</a>
+          <button class="copy-data-btn" id="copy-text-btn"><i class="ti ti-copy"></i> COPY PROFILE TEXT</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right HUD Panel: Focused Planet Details & Projects -->
+    <aside class="hud-panel panel-right hide" id="panel-details">
+      <button class="close-panel-btn" id="reset-cam-btn">
+        <i class="ti ti-arrow-left"></i> WARP OUT TO SYSTEM
+      </button>
+      
+      <div class="panel-header">
+        <i class="ti ti-planet" id="details-icon"></i>
+        <h2 id="details-title">PLANET_DETAILS</h2>
+      </div>
+      
+      <div class="panel-body scrollable" id="details-content">
+        <!-- Content dynamically injected here by app.js based on selected planet -->
+      </div>
+    </aside>
+
+    <!-- Bottom Control Dock: Instruction HUD -->
+    <footer class="hud-bottom-dock">
+      <div class="control-tip">
+        <i class="ti ti-hand-finger"></i> Left-click + Drag to rotate space &nbsp;|&nbsp; <i class="ti ti-zoom-in"></i> Scroll to zoom &nbsp;|&nbsp; <i class="ti ti-click"></i> Click celestial body to explore
+      </div>
+      <div class="speed-control">
+        <label for="orbit-speed">ORBIT SPEED</label>
+        <input type="range" id="orbit-speed" min="0" max="3" step="0.1" value="1">
+      </div>
+    </footer>
+  </div>
+
+  <!-- Core Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  
+  <!-- Project Scripts -->
+  <script src="space.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

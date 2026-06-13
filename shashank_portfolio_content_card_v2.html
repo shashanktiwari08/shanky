@@ -1,0 +1,301 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+.wrap{padding:1rem 0;}
+.profile-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;margin-bottom:1rem;}
+.avatar{width:48px;height:48px;border-radius:50%;background:#EEEDFE;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:500;color:#3C3489;flex-shrink:0;}
+.name{font-size:18px;font-weight:500;color:var(--color-text-primary);}
+.tagline{font-size:13px;color:var(--color-text-secondary);margin-top:2px;line-height:1.5;}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.meta-pill{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--color-text-secondary);background:var(--color-background-secondary);padding:4px 10px;border-radius:20px;}
+.section{margin-bottom:1rem;}
+.sec-title{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.1rem;margin-bottom:8px;}
+.card:last-child{margin-bottom:0;}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px;}
+.card-title{font-size:14px;font-weight:500;color:var(--color-text-primary);line-height:1.4;}
+.card-sub{font-size:12px;color:var(--color-text-secondary);margin-top:2px;}
+.badge{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;flex-shrink:0;}
+.b-ongoing{background:#EAF3DE;color:#27500A;}
+.b-done{background:#E6F1FB;color:#0C447C;}
+.b-intern{background:#EEEDFE;color:#3C3489;}
+.b-cert{background:#FAEEDA;color:#633806;}
+.b-tool{background:#FBEAF0;color:#72243E;}
+.card-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:8px;}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;}
+.tag{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary);}
+.link-row{display:flex;gap:8px;flex-wrap:wrap;}
+.lnk{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--color-text-info);text-decoration:none;padding:3px 8px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-info);}
+.lnk:hover{background:var(--color-background-info);}
+.new-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:2px 8px;border-radius:20px;background:#EAF3DE;color:#27500A;font-weight:500;margin-left:6px;vertical-align:middle;}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;}
+.skill-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.7rem 0.9rem;}
+.skill-label{font-size:10px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:5px;}
+.skill-items{font-size:12px;color:var(--color-text-primary);line-height:1.7;}
+.copy-all{font-size:12px;padding:6px 14px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-primary);cursor:pointer;margin-top:0.5rem;}
+.copy-all:hover{background:var(--color-background-secondary);}
+.planet-map{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.1rem;margin-bottom:1rem;}
+.planet-map-title{font-size:12px;font-weight:500;color:var(--color-text-secondary);margin-bottom:10px;}
+.planet-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:0.5px solid var(--color-border-tertiary);}
+.planet-row:last-child{border-bottom:none;}
+.planet-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:2px;}
+.planet-name{font-size:12px;font-weight:500;color:var(--color-text-primary);width:130px;flex-shrink:0;}
+.planet-projects{font-size:11px;color:var(--color-text-secondary);line-height:1.55;}
+.count-bar{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-bottom:1rem;}
+.count-item{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.7rem 0.9rem;text-align:center;}
+.count-num{font-size:22px;font-weight:500;color:var(--color-text-primary);}
+.count-label{font-size:11px;color:var(--color-text-secondary);margin-top:2px;}
+</style>
+
+<h2 class="sr-only">Shashank Tiwari — complete portfolio content v2 with QR Generator project added</h2>
+<div class="wrap">
+
+<div class="profile-card">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+    <div class="avatar">ST</div>
+    <div>
+      <div class="name">Shashank Tiwari</div>
+      <div class="tagline">Full-stack developer & AI builder · BCA (AI & Data Science) · New Delhi, India</div>
+    </div>
+  </div>
+  <div class="meta-row">
+    <span class="meta-pill"><i class="ti ti-mail" style="font-size:13px;" aria-hidden="true"></i>info.shashanktiwari@gmail.com</span>
+    <span class="meta-pill"><i class="ti ti-phone" style="font-size:13px;" aria-hidden="true"></i>+91-93543 84835</span>
+    <span class="meta-pill"><i class="ti ti-map-pin" style="font-size:13px;" aria-hidden="true"></i>New Delhi, India</span>
+  </div>
+</div>
+
+<div class="count-bar">
+  <div class="count-item"><div class="count-num">7</div><div class="count-label">Projects</div></div>
+  <div class="count-item"><div class="count-num">2</div><div class="count-label">Internships</div></div>
+  <div class="count-item"><div class="count-num">4</div><div class="count-label">Certifications</div></div>
+  <div class="count-item"><div class="count-num">5</div><div class="count-label">Live sites</div></div>
+  <div class="count-item"><div class="count-num">2</div><div class="count-label">Ongoing builds</div></div>
+</div>
+
+<div class="section">
+  <div class="sec-title"><i class="ti ti-briefcase" style="font-size:14px;" aria-hidden="true"></i>Experience</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">Post-Training LLM Intern</div>
+        <div class="card-sub">Ethara.AI &nbsp;·&nbsp; Feb 2025 – Jun 2025 &nbsp;·&nbsp; 4 months &nbsp;·&nbsp; Remote</div>
+      </div>
+      <span class="badge b-intern">Internship</span>
+    </div>
+    <div class="card-desc">Worked on post-training pipelines for large language models. Contributed to fine-tuning workflows, RLHF data preparation, and model evaluation benchmarks. Gained hands-on experience with LLM training infrastructure and AI alignment techniques.</div>
+    <div class="tags"><span class="tag">LLM fine-tuning</span><span class="tag">RLHF</span><span class="tag">Python</span><span class="tag">Model evaluation</span><span class="tag">AI alignment</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">Data Science Intern</div>
+        <div class="card-sub">INTERNSVEDA, Gurugram &nbsp;·&nbsp; Jun 2024 – Jul 2024 &nbsp;·&nbsp; 2 months</div>
+      </div>
+      <span class="badge b-intern">Internship</span>
+    </div>
+    <div class="card-desc">Analysed real-world datasets and created dashboards using Matplotlib. Performed EDA and regression modelling in team projects. Used Git & GitHub for version control and collaboration.</div>
+    <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">EDA</span><span class="tag">Regression</span><span class="tag">Git</span></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-title"><i class="ti ti-rocket" style="font-size:14px;" aria-hidden="true"></i>Projects <span style="font-size:11px;font-weight:400;color:var(--color-text-secondary);margin-left:4px;">7 total · 5 live</span></div>
+
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">EduNest — Education SaaS platform</div>
+        <div class="card-sub">Full-stack web application</div>
+      </div>
+      <span class="badge b-done">Live</span>
+    </div>
+    <div class="card-desc">A SaaS platform for education management — course delivery, student tracking, and interactive learning tools. Built with a modern full-stack architecture and deployed on Render.</div>
+    <div class="tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">SaaS</span><span class="tag">Education</span><span class="tag">Full-stack</span></div>
+    <div class="link-row"><a class="lnk" href="https://edunest-1-kg6h.onrender.com" target="_blank"><i class="ti ti-external-link" style="font-size:12px;" aria-hidden="true"></i>Live demo</a></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">Review.AI — AI-powered review analyser</div>
+        <div class="card-sub">AI / NLP web application</div>
+      </div>
+      <span class="badge b-done">Live</span>
+    </div>
+    <div class="card-desc">An AI tool that analyses and summarises customer reviews using natural language processing. Helps businesses extract sentiment, key themes, and actionable insights from large volumes of reviews.</div>
+    <div class="tags"><span class="tag">Python</span><span class="tag">NLP</span><span class="tag">AI</span><span class="tag">Sentiment analysis</span><span class="tag">Flask</span></div>
+    <div class="link-row"><a class="lnk" href="https://review-ai-e34z.onrender.com" target="_blank"><i class="ti ti-external-link" style="font-size:12px;" aria-hidden="true"></i>Live demo</a></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">iGenQR — QR code generator<span class="new-badge"><i class="ti ti-sparkles" style="font-size:10px;" aria-hidden="true"></i>New</span></div>
+        <div class="card-sub">Utility tool · Frontend project</div>
+      </div>
+      <span class="badge b-done">Live</span>
+    </div>
+    <div class="card-desc">A clean, fast QR code generator that lets users instantly create QR codes for URLs, text, contact details, and more. Features custom styling options and instant download. Deployed on Netlify with zero-backend architecture.</div>
+    <div class="tags"><span class="tag">HTML/CSS/JS</span><span class="tag">QR generation</span><span class="tag">Utility tool</span><span class="tag">Netlify</span><span class="tag">Vanilla JS</span></div>
+    <div class="link-row"><a class="lnk" href="https://igenqr.netlify.app/" target="_blank"><i class="ti ti-external-link" style="font-size:12px;" aria-hidden="true"></i>Live demo</a></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">ASH Invoice Builder — Aerosky Hospitality</div>
+        <div class="card-sub">Business tool · Client project</div>
+      </div>
+      <span class="badge b-done">Live</span>
+    </div>
+    <div class="card-desc">Custom invoice generation system built for Aerosky Hospitality. Allows the business to create, manage, and export professional invoices. Deployed on Netlify with a clean, fast frontend.</div>
+    <div class="tags"><span class="tag">HTML/CSS/JS</span><span class="tag">Invoice system</span><span class="tag">Client project</span><span class="tag">Netlify</span></div>
+    <div class="link-row"><a class="lnk" href="https://ashinvoice.netlify.app/" target="_blank"><i class="ti ti-external-link" style="font-size:12px;" aria-hidden="true"></i>Live demo</a></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">ANPR System — Automatic number plate recognition</div>
+        <div class="card-sub">Computer vision · ML project</div>
+      </div>
+      <span class="badge b-done">Completed</span>
+    </div>
+    <div class="card-desc">Web app that detects and extracts vehicle licence plates using OpenCV and OCR (Tesseract). Flask-based frontend with secure log storage. Demonstrates real-world computer vision application.</div>
+    <div class="tags"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">Flask</span><span class="tag">Tesseract OCR</span><span class="tag">Computer vision</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">Queue management system — diagnostic centres</div>
+        <div class="card-sub">SaaS / Healthcare tech · Client project</div>
+      </div>
+      <span class="badge b-ongoing">Ongoing</span>
+    </div>
+    <div class="card-desc">Digital queue management platform for diagnostic centres and clinics. Features patient token generation, real-time display boards, staff portals, attendance tracking, and admin dashboards. Built with patient data privacy and DPDPA 2023 compliance in mind.</div>
+    <div class="tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Healthcare</span><span class="tag">Real-time</span><span class="tag">Multi-portal</span><span class="tag">RBAC</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <div class="card-title">Avnika.co — jewellery e-commerce website</div>
+        <div class="card-sub">E-commerce · Client project</div>
+      </div>
+      <span class="badge b-ongoing">Ongoing</span>
+    </div>
+    <div class="card-desc">Full e-commerce website for Avnika.co, a jewellery brand. Includes product catalogue, cart, payment integration, and a clean luxury-brand aesthetic. Built with performance, mobile-first design, and security best practices.</div>
+    <div class="tags"><span class="tag">E-commerce</span><span class="tag">React</span><span class="tag">Payment gateway</span><span class="tag">Mobile-first</span><span class="tag">Jewellery brand</span></div>
+  </div>
+
+</div>
+
+<div class="section">
+  <div class="sec-title"><i class="ti ti-certificate" style="font-size:14px;" aria-hidden="true"></i>Certifications</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px;">
+    <div class="card" style="margin-bottom:0;"><div class="card-head" style="margin-bottom:0;"><div><div class="card-title" style="font-size:13px;">Big Data Engineer</div><div class="card-sub">IBM Career Education Program · Apr 2025</div></div><span class="badge b-cert">IBM</span></div></div>
+    <div class="card" style="margin-bottom:0;"><div class="card-head" style="margin-bottom:0;"><div><div class="card-title" style="font-size:13px;">Data Analytics Job Simulation</div><div class="card-sub">Deloitte via Forage · Jun 2025</div></div><span class="badge b-cert">Deloitte</span></div></div>
+    <div class="card" style="margin-bottom:0;"><div class="card-head" style="margin-bottom:0;"><div><div class="card-title" style="font-size:13px;">Foundation to AI, Data Science & Analytics</div><div class="card-sub">Samatrix · Jan 2024</div></div><span class="badge b-cert">Samatrix</span></div></div>
+    <div class="card" style="margin-bottom:0;"><div class="card-head" style="margin-bottom:0;"><div><div class="card-title" style="font-size:13px;">Data Analysis with Python</div><div class="card-sub">IBM Cognitive Class · Nov 2023</div></div><span class="badge b-cert">IBM</span></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-title"><i class="ti ti-tool" style="font-size:14px;" aria-hidden="true"></i>Technical skills</div>
+  <div class="skills-grid">
+    <div class="skill-card"><div class="skill-label">Languages</div><div class="skill-items">Python · Java · SQL · HTML/CSS/JS</div></div>
+    <div class="skill-card"><div class="skill-label">Frameworks</div><div class="skill-items">React · Flask · Node.js · Express</div></div>
+    <div class="skill-card"><div class="skill-label">AI / ML</div><div class="skill-items">LLM fine-tuning · OpenCV · Pandas · NumPy · Scikit-learn</div></div>
+    <div class="skill-card"><div class="skill-label">Data</div><div class="skill-items">Matplotlib · EDA · Regression · MySQL · SQLite</div></div>
+    <div class="skill-card"><div class="skill-label">Tools</div><div class="skill-items">Git · GitHub · VS Code · Vercel · Netlify · Render</div></div>
+    <div class="skill-card"><div class="skill-label">Concepts</div><div class="skill-items">DSA · OOP · RBAC · REST APIs · Web security</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-title"><i class="ti ti-planet" style="font-size:14px;" aria-hidden="true"></i>Solar system planet mapping — updated with QR generator</div>
+  <div class="planet-map">
+    <div class="planet-map-title">7 projects mapped across 5 planets</div>
+    <div class="planet-row">
+      <div class="planet-dot" style="background:#534AB7;"></div>
+      <div class="planet-name">AI & ML planet</div>
+      <div class="planet-projects">Review.AI · ANPR System · Ethara.AI LLM work</div>
+    </div>
+    <div class="planet-row">
+      <div class="planet-dot" style="background:#1D9E75;"></div>
+      <div class="planet-name">Web / SaaS planet</div>
+      <div class="planet-projects">EduNest · Queue Management System</div>
+    </div>
+    <div class="planet-row">
+      <div class="planet-dot" style="background:#D85A30;"></div>
+      <div class="planet-name">Client work planet</div>
+      <div class="planet-projects">Avnika.co · ASH Invoice Builder</div>
+    </div>
+    <div class="planet-row">
+      <div class="planet-dot" style="background:#D4537E;"></div>
+      <div class="planet-name">Tools & utilities moon</div>
+      <div class="planet-projects">iGenQR — QR code generator</div>
+    </div>
+    <div class="planet-row">
+      <div class="planet-dot" style="background:#BA7517;"></div>
+      <div class="planet-name">Data planet</div>
+      <div class="planet-projects">INTERNSVEDA dashboards · IBM / Deloitte cert work</div>
+    </div>
+  </div>
+</div>
+
+<button class="copy-all" onclick="copyAll()"><i class="ti ti-copy" style="font-size:13px;vertical-align:-1px;margin-right:5px;" aria-hidden="true"></i>Copy all portfolio content as text</button>
+
+</div>
+<script>
+function copyAll(){
+  const text=`SHASHANK TIWARI — PORTFOLIO CONTENT v2
+========================================
+Email: info.shashanktiwari@gmail.com | Phone: +91-93543 84835 | New Delhi, India
+
+HERO TAGLINES
+- "I build things that think."
+- "Full-stack developer. AI tinkerer. Product builder."
+- "From ML models to live products — I ship end to end."
+
+EXPERIENCE
+1. Post-Training LLM Intern — Ethara.AI (Feb–Jun 2025, 4 months)
+   LLM fine-tuning, RLHF, model evaluation, AI alignment
+2. Data Science Intern — INTERNSVEDA (Jun–Jul 2024)
+   EDA, Matplotlib dashboards, regression modelling, Git
+
+PROJECTS (7 total · 5 live)
+1. EduNest — Education SaaS | React, Node.js | https://edunest-1-kg6h.onrender.com
+2. Review.AI — AI Review Analyser | Python, NLP, Flask | https://review-ai-e34z.onrender.com
+3. iGenQR — QR Code Generator | HTML/CSS/JS | https://igenqr.netlify.app/
+4. ASH Invoice Builder | HTML/CSS/JS | https://ashinvoice.netlify.app/
+5. ANPR System | Python, OpenCV, Tesseract, Flask | (GitHub)
+6. Queue Management System — Healthcare SaaS | React, Node.js | ONGOING
+7. Avnika.co — Jewellery E-commerce | React, Payment gateway | ONGOING
+
+CERTIFICATIONS
+- Big Data Engineer — IBM (Apr 2025)
+- Data Analytics Simulation — Deloitte / Forage (Jun 2025)
+- Foundation to AI & Data Science — Samatrix (Jan 2024)
+- Data Analysis with Python — IBM Cognitive Class (Nov 2023)
+
+EDUCATION
+KR Mangalam University — BCA (AI & Data Science), CGPA 7.0
+Basava International School — CBSE Class XII Science, 65%
+
+SKILLS
+Languages: Python, Java, SQL, HTML/CSS/JS
+Frameworks: React, Flask, Node.js, Express
+AI/ML: LLM fine-tuning, OpenCV, Pandas, NumPy
+Tools: Git, GitHub, VS Code, Vercel, Netlify, Render`;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.querySelector('.copy-all');
+    btn.textContent='Copied!';
+    setTimeout(()=>{btn.innerHTML='<i class="ti ti-copy" style="font-size:13px;vertical-align:-1px;margin-right:5px;"></i>Copy all portfolio content as text';},2000);
+  });
+}
+</script>
