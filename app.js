@@ -426,10 +426,12 @@ function setupUIHandlers() {
   if (quickViewBtn && resumeModal && closeModalBtn) {
     quickViewBtn.addEventListener('click', () => {
       resumeModal.classList.remove('hide');
+      document.body.classList.add('modal-active');
       playBeepSound(550, 'triangle');
     });
     closeModalBtn.addEventListener('click', () => {
       resumeModal.classList.add('hide');
+      document.body.classList.remove('modal-active');
       playBeepSound(350, 'sine');
     });
   }

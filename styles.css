@@ -1337,3 +1337,10 @@ body.flat-view-active .close-panel-btn {
   display: none !important;
 }
 
+/* Fade out audio toggle when modal is active to prevent visual/click collisions */
+body.modal-active .audio-control {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.3s ease;
+}
+
