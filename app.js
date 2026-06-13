@@ -446,12 +446,18 @@ function setupUIHandlers() {
       toggle3D.classList.add('active');
       document.body.classList.remove('flat-view-active');
       playBeepSound(450, 'triangle');
+      setTimeout(() => {
+        if (window.dispatchEvent) window.dispatchEvent(new Event('resize'));
+      }, 80);
     });
     toggleFlat.addEventListener('click', () => {
       toggle3D.classList.remove('active');
       toggleFlat.classList.add('active');
       document.body.classList.add('flat-view-active');
       playBeepSound(450, 'triangle');
+      setTimeout(() => {
+        if (window.dispatchEvent) window.dispatchEvent(new Event('resize'));
+      }, 80);
     });
   }
   
