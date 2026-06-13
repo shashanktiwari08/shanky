@@ -838,29 +838,80 @@ body, html {
 @media (max-width: 900px) {
   #hud-container {
     padding: 10px;
-    gap: 10px;
-  }
-  .hud-panel {
-    width: auto;
-    position: relative;
+    height: 100%;
+    position: absolute;
     top: 0;
-    bottom: 0;
     left: 0;
-    right: 0;
-    height: 45%;
-    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
+  
+  .hud-panel {
+    position: absolute !important;
+    left: 10px !important;
+    right: 10px !important;
+    width: auto !important;
+    height: 48% !important;
+    bottom: 10px !important;
+    top: auto !important;
+    margin: 0 !important;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease !important;
+    z-index: 20;
+  }
+
+  /* Slide profile down when hidden or when details is active */
+  .panel-left {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  body.details-active .panel-left {
+    transform: translateY(120%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Slide details up when active, down when hidden */
+  .panel-right {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
   .panel-right.hide {
-    display: none;
-    transform: none;
+    display: flex !important; /* Keep it flex to animate, but slide offscreen */
+    transform: translateY(120%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
+  
   .hide-mobile {
     display: none;
   }
+  
   .hud-top-bar {
-    margin-bottom: 10px;
+    height: 45px;
+    padding: 0 10px;
   }
+  
+  .hud-logo h1 {
+    font-size: 0.75rem;
+  }
+  
+  .hud-telemetry {
+    font-size: 0.55rem;
+    gap: 10px;
+  }
+  
   .hud-bottom-dock {
     display: none;
+  }
+  
+  .audio-control {
+    top: 65px;
+    right: 10px;
+    padding: 4px 8px;
+    font-size: 0.55rem;
   }
 }

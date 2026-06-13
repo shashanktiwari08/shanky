@@ -438,7 +438,18 @@ window.onFocusChange = function(targetKey) {
     detailsContent.innerHTML = data.html;
     
     // Show details drawer
-    detailsPanel.classList.remove('hide');
+    // Show/hide drawer and toggle classes dynamically for mobile layouts
+    if (targetKey === 'sun' && window.innerWidth <= 900) {
+      detailsPanel.classList.add('hide');
+      document.body.classList.remove('details-active');
+    } else {
+      detailsPanel.classList.remove('hide');
+      if (targetKey !== 'sun') {
+        document.body.classList.add('details-active');
+      } else {
+        document.body.classList.remove('details-active');
+      }
+    }
     
     // If targeted planet has QR generator inside (Tools moon), hook listener
     if (targetKey === 'moon-tools') {
@@ -456,6 +467,7 @@ window.onFocusChange = function(targetKey) {
   } else {
     // Hide panel
     detailsPanel.classList.add('hide');
+    document.body.classList.remove('details-active');
   }
 };
 
