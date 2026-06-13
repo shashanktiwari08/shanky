@@ -365,9 +365,9 @@ function focusCelestialBody(targetKey) {
     window.onFocusChange(targetKey);
   }
   
-  // Determine zoom distance based on scale size
+  // Determine zoom distance based on scale size (closer orbit entry feel)
   const config = celestialConfig[targetKey];
-  const targetOffsetDistance = config.size * 3.8;
+  const targetOffsetDistance = config.size * 2.4;
   
   // Animate controls target position to the planet center coordinates
   const worldPos = new THREE.Vector3();

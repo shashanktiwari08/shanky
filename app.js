@@ -1,5 +1,11 @@
 // Main App Controller - Handling HUD UI, Telemetry, Interactions & Soundscapes
 
+// Scroll Sectors Configuration
+const sectors = ['sun', 'planet-ai', 'planet-web', 'planet-client', 'planet-data', 'moon-tools'];
+let currentSectorIndex = 0;
+let lastScrollTime = 0;
+const scrollCooldown = 1500; // ms
+
 // Web Audio API Synthesizer Context
 let audioCtx;
 let ambientDrone;
@@ -410,6 +416,90 @@ function setupUIHandlers() {
       }
       playBeepSound(400, 'sine', 0.1);
     });
+  // Initialize scrollwheel storytelling hooks
+  setupScrollManager();
+}
+
+// Custom Scroll Manager for warp scrolling between planets
+function setupScrollManager() {
+  // Wheel Scroll event listener
+  window.addEventListener('wheel', (e) => {
+    // If user is scrolling inside a sidebar scroll drawer, do not scroll between planets
+    if (e.target.closest('.scrollable')) return;
+    
+    const now = Date.now();
+    if (now - lastScrollTime < scrollCooldown) return;
+    
+    if (Math.abs(e.deltaY) > 30) {
+      if (e.deltaY > 0) {
+        // Scroll Down -> Next Planet
+        if (currentSectorIndex < sectors.length - 1) {
+          currentSectorIndex++;
+          warpToSector(sectors[currentSectorIndex]);
+          lastScrollTime = now;
+        }
+      } else {
+        // Scroll Up -> Previous Planet
+        if (currentSectorIndex > 0) {
+          currentSectorIndex--;
+          warpToSector(sectors[currentSectorIndex]);
+          lastScrollTime = now;
+        }
+      }
+    }
+  }, { passive: true });
+  
+  // Swipe Gestures for Touch Screens / Mobile
+  let touchStartY = 0;
+  window.addEventListener('touchstart', (e) => {
+    if (e.target.closest('.scrollable')) return;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  
+  window.addEventListener('touchend', (e) => {
+    if (e.target.closest('.scrollable')) return;
+    const touchEndY = e.changedTouches[0].clientY;
+    const diffY = touchStartY - touchEndY;
+    
+    const now = Date.now();
+    if (now - lastScrollTime < scrollCooldown) return;
+    
+    if (Math.abs(diffY) > 50) {
+      if (diffY > 0) {
+        // Swipe Up -> Next (Scroll Down)
+        if (currentSectorIndex < sectors.length - 1) {
+          currentSectorIndex++;
+          warpToSector(sectors[currentSectorIndex]);
+          lastScrollTime = now;
+        }
+      } else {
+        // Swipe Down -> Prev (Scroll Up)
+        if (currentSectorIndex > 0) {
+          currentSectorIndex--;
+          warpToSector(sectors[currentSectorIndex]);
+          lastScrollTime = now;
+        }
+      }
+    }
+  }, { passive: true });
+}
+
+function warpToSector(targetSector) {
+  // Update sidebar navigator buttons active highlight
+  const navButtons = document.querySelectorAll('.nav-target');
+  navButtons.forEach(btn => {
+    if (btn.getAttribute('data-target') === targetSector) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+  
+  // Transition camera
+  if (targetSector === 'sun') {
+    resetCameraView();
+  } else {
+    focusCelestialBody(targetSector);
   }
 }
 
@@ -419,6 +509,12 @@ window.onFocusChange = function(targetKey) {
   const detailsTitle = document.getElementById('details-title');
   const detailsIcon = document.getElementById('details-icon');
   const detailsContent = document.getElementById('details-content');
+  
+  // Synchronize scroll index
+  const index = sectors.indexOf(targetKey);
+  if (index !== -1) {
+    currentSectorIndex = index;
+  }
   
   // Highlight matching sidebar selector button
   const navButtons = document.querySelectorAll('.nav-target');
