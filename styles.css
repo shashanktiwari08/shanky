@@ -1015,12 +1015,13 @@ body, html {
   justify-content: center;
   align-items: center;
   transition: opacity var(--transition-normal), visibility var(--transition-normal);
+  pointer-events: auto !important; /* Enable clicks & scrolling inside the modal */
 }
 
 .modal-overlay.hide {
   opacity: 0;
   visibility: hidden;
-  pointer-events: none;
+  pointer-events: none !important; /* Disable clicks when hidden */
 }
 
 .modal-card {
