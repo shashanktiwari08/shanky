@@ -31,7 +31,7 @@ const portfolioData = {
         
         <div class="timeline-item">
           <div class="timeline-title">Post-Training LLM Intern</div>
-          <div class="timeline-sub">Ethara.AI &nbsp;·&nbsp; Feb 2025 – Jun 2025 (4 mos)</div>
+          <div class="timeline-sub">Ethara.AI &nbsp;·&nbsp; Feb 2025 – Jun 2025 (4 mos) &nbsp;·&nbsp; On-Site</div>
           <div class="timeline-desc">Optimized training workflows and post-training pipelines. Managed model alignment using RLHF protocols and fine-tuning configurations.</div>
         </div>
 
@@ -443,6 +443,13 @@ function setupUIHandlers() {
       const modalBody = resumeModal.querySelector('.modal-body');
       let targetEl = null;
       
+      // Clean previous highlight glow states
+      modalBody.querySelectorAll('.modal-resume-item, .modal-project-row, .cert-row').forEach(el => {
+        el.style.boxShadow = 'none';
+        el.style.borderColor = 'rgba(255,255,255,0.05)';
+        el.style.background = 'transparent';
+      });
+      
       if (sectionSelector === 'projects') {
         // Find PROJECTS REGISTRY header
         const titles = Array.from(modalBody.querySelectorAll('.section-title'));
@@ -456,8 +463,8 @@ function setupUIHandlers() {
         const titles = Array.from(modalBody.querySelectorAll('.section-title'));
         targetEl = titles.find(el => el.textContent.includes('CERT'));
       } else if (sectionSelector === 'live') {
-        // Scroll to the first live link project row
-        targetEl = modalBody.querySelector('.badge-live') || modalBody.querySelector('.project-row-head a');
+        // Find first project row with a Live link
+        targetEl = modalBody.querySelector('.modal-project-row');
       }
       
       if (targetEl && modalBody) {
@@ -465,6 +472,19 @@ function setupUIHandlers() {
           top: targetEl.offsetTop - 20,
           behavior: 'smooth'
         });
+        
+        // Visual "pop out" indicator glow on the targeted block
+        const blockToHighlight = targetEl.nextElementSibling || targetEl;
+        blockToHighlight.style.transition = 'all 0.5s ease';
+        blockToHighlight.style.background = 'rgba(0, 210, 255, 0.08)';
+        blockToHighlight.style.borderColor = 'rgba(0, 210, 255, 0.45)';
+        blockToHighlight.style.boxShadow = '0 0 15px rgba(0, 210, 255, 0.15)';
+        
+        setTimeout(() => {
+          blockToHighlight.style.background = '';
+          blockToHighlight.style.borderColor = '';
+          blockToHighlight.style.boxShadow = '';
+        }, 2500);
       }
     }, 100);
   }
