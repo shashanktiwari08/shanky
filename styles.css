@@ -900,21 +900,33 @@ body, html {
   }
   
   .hide-mobile {
-    display: none;
+    display: none !important;
   }
   
   .hud-top-bar {
-    height: 45px;
+    height: 55px;
     padding: 0 10px;
+    gap: 8px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
   }
   
   .hud-logo h1 {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+  }
+
+  .hud-logo {
+    gap: 5px;
+  }
+
+  .pulse-dot {
+    width: 6px;
+    height: 6px;
   }
   
   .hud-telemetry {
-    font-size: 0.55rem;
-    gap: 10px;
+    display: none !important; /* Hide telemetry on mobile to make room for toggle switcher */
   }
   
   .hud-bottom-dock {
@@ -922,10 +934,24 @@ body, html {
   }
   
   .audio-control {
-    top: 65px;
+    top: 70px;
     right: 10px;
     padding: 4px 8px;
     font-size: 0.55rem;
+  }
+
+  /* Optimize modal popup sizing on mobile screens */
+  .modal-card {
+    width: 95% !important;
+    height: 90% !important;
+  }
+
+  .modal-body {
+    padding: 15px !important;
+  }
+
+  .modal-section-hero h2 {
+    font-size: 1.4rem !important;
   }
 }
 
