@@ -269,6 +269,21 @@ function buildOrrery() {
     mesh.castShadow = true;
     mesh.receiveShadow = true;
     
+    // Web Planet clouds layer overlay
+    if (key === 'planet-web') {
+      const cloudGeo = new THREE.SphereGeometry(1.05, 32, 32);
+      const cloudTex = createProceduralTexture('marble', '#ffffff');
+      const cloudMat = new THREE.MeshStandardMaterial({
+        map: cloudTex,
+        transparent: true,
+        opacity: 0.35,
+        blending: THREE.NormalBlending
+      });
+      const clouds = new THREE.Mesh(cloudGeo, cloudMat);
+      mesh.add(clouds);
+      mesh.clouds = clouds;
+    }
+    
     // Store reference
     celestialBodies[key] = mesh;
     
@@ -380,9 +395,25 @@ function focusCelestialBody(targetKey) {
     worldPos.z + targetOffsetDistance * 0.8
   );
   
-  // Trigger synthesised telemetry sweep sound
+  // Trigger synthesised telemetry sweep sound & screen glitch
   if (window.playWarpSound) window.playWarpSound();
   
+  // Warp FOV camera zoom effect
+  gsap.to(camera, {
+    fov: 82,
+    duration: 0.7,
+    ease: 'power2.in',
+    onUpdate: () => camera.updateProjectionMatrix(),
+    onComplete: () => {
+      gsap.to(camera, {
+        fov: 60,
+        duration: 1.1,
+        ease: 'power2.out',
+        onUpdate: () => camera.updateProjectionMatrix()
+      });
+    }
+  });
+
   // Use GSAP for cinematic flight
   gsap.timeline({
     onComplete: () => {
@@ -418,6 +449,22 @@ function resetCameraView() {
   
   if (window.playWarpSound) window.playWarpSound();
   
+  // Warp FOV camera zoom effect
+  gsap.to(camera, {
+    fov: 82,
+    duration: 0.6,
+    ease: 'power2.in',
+    onUpdate: () => camera.updateProjectionMatrix(),
+    onComplete: () => {
+      gsap.to(camera, {
+        fov: 60,
+        duration: 0.9,
+        ease: 'power2.out',
+        onUpdate: () => camera.updateProjectionMatrix()
+      });
+    }
+  });
+
   gsap.timeline({
     onComplete: () => {
       isTransitioning = false;
@@ -458,6 +505,11 @@ function animate() {
     
     // Rotate celestial bodies on their own spin axis
     mesh.rotation.y += 0.015;
+    
+    // Rotate cloud layer if exists
+    if (mesh.clouds) {
+      mesh.clouds.rotation.y -= 0.022;
+    }
     
     if (config.parent) {
       // Sub-orbit (Moon orbits Parent Planet)

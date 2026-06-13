@@ -632,6 +632,14 @@ function playBeepSound(frequency = 800, type = 'sine', volume = 0.15) {
 
 // Cinematic sweep warp sound when camera flies
 window.playWarpSound = function() {
+  // Trigger HTML glitch overlay flash
+  const glitchLayer = document.getElementById('glitch-layer');
+  if (glitchLayer) {
+    glitchLayer.classList.remove('active');
+    void glitchLayer.offsetWidth; // Reflow to reset animation
+    glitchLayer.classList.add('active');
+  }
+
   if (!audioCtx || audioCtx.state !== 'running') return;
   
   const osc = audioCtx.createOscillator();
@@ -650,4 +658,31 @@ window.playWarpSound = function() {
   
   osc.start();
   osc.stop(audioCtx.currentTime + 1.6);
+};
+
+// Cinematic sub-bass arrival impact drop sound
+window.playArrivalSound = function() {
+  if (!audioCtx || audioCtx.state !== 'running') return;
+  
+  const osc = audioCtx.createOscillator();
+  const filter = audioCtx.createBiquadFilter();
+  const gainNode = audioCtx.createGain();
+  
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(45, audioCtx.currentTime + 0.9);
+  
+  filter.type = 'lowpass';
+  filter.frequency.setValueAtTime(200, audioCtx.currentTime);
+  filter.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.9);
+  
+  gainNode.gain.setValueAtTime(0.35, audioCtx.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.0);
+  
+  osc.connect(filter);
+  filter.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
+  
+  osc.start();
+  osc.stop(audioCtx.currentTime + 1.1);
 };
