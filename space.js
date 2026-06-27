@@ -173,70 +173,86 @@ function runGuidedOnboardingSequence() {
   controls.enabled = false;
   
   // Set initial coordinates far outside the galaxy arm
-  camera.position.set(-180, 75, -150);
+  camera.position.set(-250, 120, -220);
   controls.target.set(0, 0, 0);
   camera.lookAt(0, 0, 0);
   
-  // Fly camera from outer galaxy edge, dipping down through arms, then centering on Sun
-  gsap.timeline({
+  // Dynamic curved flight path: outer edge -> dipping into arm -> zooming past core -> leveling in solar system
+  const tl = gsap.timeline({
     onComplete: () => {
       isTransitioning = false;
       controls.enabled = true;
     }
+  });
+  
+  // Animate camera position in curve steps
+  tl.to(camera.position, {
+    x: -80,
+    y: 35,
+    z: -40,
+    duration: 2.2,
+    ease: "power2.inOut"
+  })
+  .to(camera.position, {
+    x: 40,
+    y: 15,
+    z: 50,
+    duration: 1.8,
+    ease: "power1.inOut"
   })
   .to(camera.position, {
     x: 0,
     y: 65,
     z: 110,
-    duration: 4.5,
-    ease: 'power3.inOut'
-  }, 0);
+    duration: 1.8,
+    ease: "power2.out"
+  });
 }
 
-// Generate a beautiful, realistic double-arm Spiral Galaxy starfield
+// Generate a beautiful, realistic double-arm Spiral Galaxy starfield with circular glowing textures
 function initStarfield() {
-  const particleCount = 6000;
+  const particleCount = 12000;
   const geometry = new THREE.BufferGeometry();
   const positions = new Float32Array(particleCount * 3);
   const colors = new Float32Array(particleCount * 3);
   
   for (let i = 0; i < particleCount * 3; i += 3) {
     // Spiral Galaxy geometry generation parameters
-    const r = Math.pow(Math.random(), 2.5) * 220; // Dense towards core
+    const r = Math.pow(Math.random(), 2.2) * 280; // Volumetric spread
     const arms = 2;
-    const spiralFactor = 0.08;
+    const spiralFactor = 0.07;
     const theta = (i / 3) * (Math.PI * 2 / arms) + (r * spiralFactor);
     
     // Add random distribution scatter/fuzziness to form arms organically
-    const randomOffset = (Math.random() - 0.5) * (18 + r * 0.1);
-    const randomY = (Math.random() - 0.5) * (8 + r * 0.04); // flatter disk shape
+    const randomOffset = (Math.random() - 0.5) * (20 + r * 0.12);
+    const randomY = (Math.random() - 0.5) * (10 + r * 0.05); // flatter disk shape
     
     positions[i] = r * Math.cos(theta) + randomOffset;
     positions[i+1] = randomY; // disk vertical thickness
-    positions[i+2] = r * Math.sin(theta) + (Math.random() - 0.5) * (18 + r * 0.1);
+    positions[i+2] = r * Math.sin(theta) + (Math.random() - 0.5) * (20 + r * 0.12);
     
     // Visual galaxy colors: bright hot cyan center, purple-blue mid disk, dust orange edges
     const rand = Math.random();
-    if (r < 40) {
+    if (r < 50) {
       // Hot bright white/cyan core
-      colors[i] = 0.9;
-      colors[i+1] = 0.95;
+      colors[i] = 1.0;
+      colors[i+1] = 1.0;
       colors[i+2] = 1.0;
-    } else if (r < 120) {
+    } else if (r < 150) {
       // Purple / Violet arms
-      colors[i] = 0.7 + Math.random() * 0.2;
-      colors[i+1] = 0.3 + Math.random() * 0.2;
-      colors[i+2] = 0.9 + Math.random() * 0.1;
+      colors[i] = 0.65 + Math.random() * 0.25;
+      colors[i+1] = 0.35 + Math.random() * 0.25;
+      colors[i+2] = 1.0;
     } else {
       // Warm cosmic dust edges (orange/cyan mix)
       if (rand < 0.5) {
-        colors[i] = 0.2 + Math.random() * 0.3;
-        colors[i+1] = 0.6 + Math.random() * 0.2;
-        colors[i+2] = 0.9;
+        colors[i] = 0.1;
+        colors[i+1] = 0.7;
+        colors[i+2] = 1.0;
       } else {
-        colors[i] = 0.95;
-        colors[i+1] = 0.5 + Math.random() * 0.2;
-        colors[i+2] = 0.3 + Math.random() * 0.2;
+        colors[i] = 1.0;
+        colors[i+1] = 0.5;
+        colors[i+2] = 0.2;
       }
     }
   }
@@ -244,11 +260,28 @@ function initStarfield() {
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
   
+  // Create a high-fidelity glowing radial star texture canvas dynamically
+  const canvas = document.createElement('canvas');
+  canvas.width = 16;
+  canvas.height = 16;
+  const ctx = canvas.getContext('2d');
+  const grad = ctx.createRadialGradient(8, 8, 0, 8, 8, 8);
+  grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+  grad.addColorStop(0.3, 'rgba(255, 255, 255, 0.8)');
+  grad.addColorStop(0.6, 'rgba(0, 210, 255, 0.2)');
+  grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 16, 16);
+  const texture = new THREE.CanvasTexture(canvas);
+  
   const starMaterial = new THREE.PointsMaterial({
-    size: 0.6,
+    size: 1.2,
     vertexColors: true,
     transparent: true,
-    opacity: 0.85,
+    opacity: 0.95,
+    map: texture,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
     sizeAttenuation: true
   });
   
