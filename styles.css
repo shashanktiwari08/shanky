@@ -312,10 +312,11 @@ body, html {
 }
 
 .panel-header h2 {
-  font-family: var(--font-hud);
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  color: #e2e8f0;
+  font-family: var(--font-text);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: #cbd5e1;
 }
 
 .panel-body {
