@@ -134,8 +134,7 @@ function initSpaceScene() {
   controls.maxDistance = 250;
   controls.minDistance = 8;
   
-  // 3. Ambient Starfield Background
-  initStarfield();
+  // 3. Ambient Starfield Background removed to clear particle layers
   
   // 4. Lights
   // The Sun acts as our point light source (orbital shadows and glow)
