@@ -231,12 +231,12 @@ function initStarfield() {
     positions[i+1] = randomY; // disk vertical thickness
     positions[i+2] = r * Math.sin(theta) + (Math.random() - 0.5) * (20 + r * 0.12);
     
-    // Visual galaxy colors: bright hot cyan center, purple-blue mid disk, dust orange edges
+    // Visual galaxy colors: deep cyan center, purple-blue mid disk, dust orange edges
     const rand = Math.random();
     if (r < 50) {
-      // Hot bright white/cyan core
-      colors[i] = 1.0;
-      colors[i+1] = 1.0;
+      // Hot bright cyan/blue core
+      colors[i] = 0.0;
+      colors[i+1] = 0.85;
       colors[i+2] = 1.0;
     } else if (r < 150) {
       // Purple / Violet arms
@@ -260,15 +260,15 @@ function initStarfield() {
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
   
-  // Create a high-fidelity glowing radial star texture canvas dynamically
+  // Create a high-fidelity glowing radial star texture canvas dynamically (No white center)
   const canvas = document.createElement('canvas');
   canvas.width = 16;
   canvas.height = 16;
   const ctx = canvas.getContext('2d');
   const grad = ctx.createRadialGradient(8, 8, 0, 8, 8, 8);
-  grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-  grad.addColorStop(0.3, 'rgba(255, 255, 255, 0.8)');
-  grad.addColorStop(0.6, 'rgba(0, 210, 255, 0.2)');
+  grad.addColorStop(0, 'rgba(0, 210, 255, 1)');
+  grad.addColorStop(0.3, 'rgba(0, 150, 255, 0.7)');
+  grad.addColorStop(0.7, 'rgba(136, 51, 255, 0.2)');
   grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, 16, 16);
