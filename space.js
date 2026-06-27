@@ -165,19 +165,19 @@ function initSpaceScene() {
   runGuidedOnboardingSequence();
 }
 
-// Cinematic Deep Space Camera descent onboarding
+// Cinematic Deep Space Camera descent onboarding diving through the spiral galaxy arms
 function runGuidedOnboardingSequence() {
   isTransitioning = true;
   
   // Lock controls temporarily
   controls.enabled = false;
   
-  // Set initial dramatic distant coordinates
-  camera.position.set(30, 140, 210);
+  // Set initial coordinates far outside the galaxy arm
+  camera.position.set(-180, 75, -150);
   controls.target.set(0, 0, 0);
   camera.lookAt(0, 0, 0);
   
-  // Smoothly descend camera into standard viewing orbit
+  // Fly camera from outer galaxy edge, dipping down through arms, then centering on Sun
   gsap.timeline({
     onComplete: () => {
       isTransitioning = false;
@@ -188,57 +188,67 @@ function runGuidedOnboardingSequence() {
     x: 0,
     y: 65,
     z: 110,
-    duration: 3.2,
-    ease: 'power2.out'
+    duration: 4.5,
+    ease: 'power3.inOut'
   }, 0);
 }
 
-// Generate cosmic particle starfield
+// Generate a beautiful, realistic double-arm Spiral Galaxy starfield
 function initStarfield() {
-  const particleCount = 4500;
+  const particleCount = 6000;
   const geometry = new THREE.BufferGeometry();
   const positions = new Float32Array(particleCount * 3);
   const colors = new Float32Array(particleCount * 3);
   
   for (let i = 0; i < particleCount * 3; i += 3) {
-    // Place randomly in a huge sphere shell
-    const radius = 180 + Math.random() * 150;
-    const theta = Math.random() * Math.PI * 2;
-    const phi = Math.acos((Math.random() * 2) - 1);
+    // Spiral Galaxy geometry generation parameters
+    const r = Math.pow(Math.random(), 2.5) * 220; // Dense towards core
+    const arms = 2;
+    const spiralFactor = 0.08;
+    const theta = (i / 3) * (Math.PI * 2 / arms) + (r * spiralFactor);
     
-    positions[i] = radius * Math.sin(phi) * Math.cos(theta);
-    positions[i+1] = radius * Math.sin(phi) * Math.sin(theta);
-    positions[i+2] = radius * Math.cos(phi);
+    // Add random distribution scatter/fuzziness to form arms organically
+    const randomOffset = (Math.random() - 0.5) * (18 + r * 0.1);
+    const randomY = (Math.random() - 0.5) * (8 + r * 0.04); // flatter disk shape
     
-    // Varying star temperatures/colors (soft blue, yellow-white, pale red)
+    positions[i] = r * Math.cos(theta) + randomOffset;
+    positions[i+1] = randomY; // disk vertical thickness
+    positions[i+2] = r * Math.sin(theta) + (Math.random() - 0.5) * (18 + r * 0.1);
+    
+    // Visual galaxy colors: bright hot cyan center, purple-blue mid disk, dust orange edges
     const rand = Math.random();
-    if (rand < 0.6) {
-      // White/yellow
-      colors[i] = 0.9 + Math.random() * 0.1;
-      colors[i+1] = 0.9 + Math.random() * 0.1;
-      colors[i+2] = 0.8 + Math.random() * 0.2;
-    } else if (rand < 0.85) {
-      // Cyans / Blues
-      colors[i] = 0.6 + Math.random() * 0.2;
-      colors[i+1] = 0.8 + Math.random() * 0.2;
+    if (r < 40) {
+      // Hot bright white/cyan core
+      colors[i] = 0.9;
+      colors[i+1] = 0.95;
       colors[i+2] = 1.0;
+    } else if (r < 120) {
+      // Purple / Violet arms
+      colors[i] = 0.7 + Math.random() * 0.2;
+      colors[i+1] = 0.3 + Math.random() * 0.2;
+      colors[i+2] = 0.9 + Math.random() * 0.1;
     } else {
-      // Soft Orange
-      colors[i] = 1.0;
-      colors[i+1] = 0.6 + Math.random() * 0.2;
-      colors[i+2] = 0.4 + Math.random() * 0.2;
+      // Warm cosmic dust edges (orange/cyan mix)
+      if (rand < 0.5) {
+        colors[i] = 0.2 + Math.random() * 0.3;
+        colors[i+1] = 0.6 + Math.random() * 0.2;
+        colors[i+2] = 0.9;
+      } else {
+        colors[i] = 0.95;
+        colors[i+1] = 0.5 + Math.random() * 0.2;
+        colors[i+2] = 0.3 + Math.random() * 0.2;
+      }
     }
   }
   
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
   
-  // Beautiful glowing particle texture
   const starMaterial = new THREE.PointsMaterial({
-    size: 0.8,
+    size: 0.6,
     vertexColors: true,
     transparent: true,
-    opacity: 0.95,
+    opacity: 0.85,
     sizeAttenuation: true
   });
   
